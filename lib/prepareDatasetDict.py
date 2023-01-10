@@ -17,12 +17,15 @@ def createDatasetDict(train_manifest_path, val_manifest_path, test_manifest_path
     with open (train_manifest_path, 'r') as f:
         lines = f.readlines()
         for i, line in tqdm(enumerate(lines)):
-            jsonObj = json.loads(line)
-            path = jsonObj["audio_filepath"]
-            path = f"{data_location}/{path.split(sep = '/')[-1]}"
-            text = jsonObj["text"]
-            samplerate, audio = wavfile.read(path)
-            trainDF.loc[i] = [path, audio, text]
+            try:
+                jsonObj = json.loads(line)
+                path = jsonObj["audio_filepath"]
+                path = f"{data_location}/{path.split(sep = '/')[-1]}"
+                text = jsonObj["text"]
+                samplerate, audio = wavfile.read(path)
+                trainDF.loc[i] = [path, audio, text]
+            except:
+                print('error occurred. but you can ignore it.')
     
 
 
@@ -38,12 +41,15 @@ def createDatasetDict(train_manifest_path, val_manifest_path, test_manifest_path
     with open (val_manifest_path, 'r') as f:
         lines = f.readlines()
         for i, line in tqdm(enumerate(lines)):
-            jsonObj = json.loads(line)
-            path = jsonObj["audio_filepath"]
-            path = f"{data_location}/{path.split(sep = '/')[-1]}"
-            text = jsonObj["text"]
-            samplerate, audio = wavfile.read(path)
-            valDF.loc[i] = [path, audio, text]
+            try:
+                jsonObj = json.loads(line)
+                path = jsonObj["audio_filepath"]
+                path = f"{data_location}/{path.split(sep = '/')[-1]}"
+                text = jsonObj["text"]
+                samplerate, audio = wavfile.read(path)
+                valDF.loc[i] = [path, audio, text]
+            except:
+                print('error occurred. but you can ignore it.')
 
     
 
@@ -54,12 +60,15 @@ def createDatasetDict(train_manifest_path, val_manifest_path, test_manifest_path
     with open (test_manifest_path, 'r') as f:
         lines = f.readlines()
         for i, line in tqdm(enumerate(lines)):
-            jsonObj = json.loads(line)
-            path = jsonObj["audio_filepath"]
-            path = f"{data_location}/{path.split(sep = '/')[-1]}"
-            text = jsonObj["text"]
-            samplerate, audio = wavfile.read(path)
-            testDF.loc[i] = [path, audio, text]
+            try:
+                jsonObj = json.loads(line)
+                path = jsonObj["audio_filepath"]
+                path = f"{data_location}/{path.split(sep = '/')[-1]}"
+                text = jsonObj["text"]
+                samplerate, audio = wavfile.read(path)
+                testDF.loc[i] = [path, audio, text]
+            except:
+                print('error occurred. but you can ignore it.')
 
 
 
